@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <title>STOP WATCH</title>
+<style>
+    .main {
+  font-family: arial;
+  padding: 25px;
+  margin-top: 40px;
+  font-size: 4.0em;
+}
+
+#output {
+  font-size: 8.0em;
+  width: 43%;
+  height: auto;
+  background-color: white;
+  border: 3px solid black;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 45px;
+}
+
+.btn {
+  margin-top: 40px;
+  font-size: 1.8em;
+}
+</style>
+
+
+</head>
+
+
+<body>
+  <h1 class = "main text-center">STOP WATCH</h1>
+
+      <p id = "output" class = "text-center"></p>
+  <div id = "controls" class = "text-center">
+    <button class="btn btn-default" id = "startPause" onclick = "startPause()">START</button>
+    <button class="btn btn-default" onclick = "reset()">RESET</button>
+  </div>
+</body>
+
+
+
+<script>
+var time = 0;
+var running = 0;
+
+function startPause() {
+    if (running == 0) {
+        running = 1;
+        increment();
+        document.getElementById("startPause").innerHTML = "PAUSE";
+    } else {
+        running = 0;
+        document.getElementById("startPause").innerHTML = "RESUME";
+    }
+}
+
+function reset(){
+    running = 0;
+    time = 0;
+    document.getElementById("startPause").innerHTML = "START";
+    document.getElementById("output").innerHTML = "00:00:00";
+}
+
+function increment() {
+    if (running == 1) {
+        setTimeout(function() {
+            time++;
+            
+            var mins = Math.floor(time/10/60);
+            var secs = Math.floor(time/10 % 60);
+            var tenths = time % 10;
+            
+            if (mins < 10) {
+              mins = "0" + mins;
+            } 
+            if (secs < 10) {
+              secs = "0" + secs;
+            }
+            document.getElementById("output").innerHTML = mins + ":" + secs + ":" + "0" + tenths;
+            increment();
+        },100);
+    }
+}
+</script>
+
+
+</html>
+
+
+
